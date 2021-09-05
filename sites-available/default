@@ -1,0 +1,49 @@
+server {
+
+	# SSL configuration
+	
+	listen 443 http2 ssl default_server;
+	listen [::]:443 http2 ssl default_server;
+	
+	root /etc/nginx/views;
+
+	index index.html;
+
+	server_name raphaserver.dedyn.io;
+
+	gzip off;
+
+	ssl_certificate /etc/letsencrypt/live/raphaserver.dedyn.io/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/raphaserver.dedyn.io/privkey.pem;
+
+	ssl_protocols  TLSv1.2 TLSv1.3; 
+	ssl_prefer_server_ciphers on;
+
+	ssl_ecdh_curve secp384r1;
+
+	ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384;
+
+	ssl_stapling on;
+	ssl_stapling_verify on;
+
+	add_header X-Frame-Options DENY;
+	add_header X-Content-Type-Options nosniff;
+	add_header X-XSS-Protection "1; mode=block";
+	add_header Referrer-Policy no-referrer;
+	add_header Strict-Transport-Security "max-age=31536000";
+	add_header Content-Security-Policy "default-src 'none';frame-ancestors 'none'; img-src 'self'; require-trusted-types-for 'script'; base-uri 'none'; form-action 'none'";
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name raphaserver.dedyn.io;
+
+	return 301 https://$host$request_uri;
+
+}
