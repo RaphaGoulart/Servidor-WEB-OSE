@@ -1,6 +1,7 @@
 # Projeto de estrutura de um servidor web implementando normas e protocolos de segurança segundo o projeto Open Standards Everywhere
 
 Para esse projeto foram consideradas as normas definidas pela OSE listadas abaixo:
+
 	•IPv6
 		– Nome de servidores com IPv6
 		– Servidores acessíveis via IPv6
@@ -38,8 +39,11 @@ Para esse projeto foram consideradas as normas definidas pela OSE listadas abaix
 		– Utilização do CSP para proteger os visitantes de ataques como clickjacking
 		– A utilização do X-Frame-Options para proteger os visitantes de navegadores mais antigos que não oferecem suporte a CSP
 		– X-Content-Type-Options com valor nosniff
-		– X-XSS-Protection com valor 1; mode=block para ativar a filtragem XSS. Para essa configuração o navegador impedirá a renderização da página se um ataque for detectado 
-		– Referrer-Policy configurado com no-referrer ou same-origin quando não possui dados sensíveis para terceiros. Quando possuir dados confidenciais para terceiros deve ser utilizado strict-origin ou strict-origin-when-cross-origin, apenas por meio de conexões seguras (HTTPS)
+		– X-XSS-Protection com valor 1; mode=block para ativar a filtragem XSS. Para essa configuração o navegador impedirá a
+		renderização da página se um ataque for detectado 
+		– Referrer-Policy configurado com no-referrer ou same-origin quando não possui dados sensíveis para terceiros. 
+		Quando possuir dados confidenciais para terceiros deve ser utilizado strict-origin ou strict-origin-when-cross-origin, apenas
+		por meio de conexões seguras (HTTPS)
 
 Dúvidas podem ser enviadas para raphaela.sgoulart@gmail.com
 
